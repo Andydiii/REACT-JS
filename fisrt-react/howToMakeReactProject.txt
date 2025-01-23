@@ -1,0 +1,4 @@
+npm create vite@latest
+cd fisrt-react
+npm install
+npm run dev
