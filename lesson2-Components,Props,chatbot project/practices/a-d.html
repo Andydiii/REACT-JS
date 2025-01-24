@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+</head>
+<body>
+    <div id='container' class="js-container"></div>
+
+    <!-- these two scrips loaded react library. -->
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <!-- external library "babel": translate JSX(js XML) used by react into JS -->
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <!-- dayjs library -->
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+    <!-- our own set up code -->
+    <script type="text/babel">
+
+        function LoginForm() {
+            return (
+                <>
+                    <p>Hello, welcome to my website</p>
+                    <div><input type="text" placeholder="enter your username" /></div>
+                    <div><input type="password" placeholder="enter your password"/></div>
+                    <button>Login</button>
+                    <button>Sign up</button>
+                </>
+            )
+        }
+
+        function App() {
+            return (
+                <LoginForm />
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.querySelector('#container'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

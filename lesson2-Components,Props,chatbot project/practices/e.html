@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+</head>
+<body>
+    <div id='container' class="js-container"></div>
+
+    <!-- these two scrips loaded react library. -->
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <!-- external library "babel": translate JSX(js XML) used by react into JS -->
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <!-- dayjs library -->
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+    <!-- our own set up code -->
+    <script type="text/babel">
+        // component1: product
+        function Product({name, price, discountPrice, imgSrc}) {
+            return (
+                <div>
+                    <img src={imgSrc} width="50px"/>
+                    <p>{name}</p>
+                    {discountPrice === undefined ? <p>{price}</p> : (
+                        <>
+                            <del><p>{price}</p></del>
+                            <p>Discount Price: {discountPrice}</p>
+                        </>
+                    )}
+                    <button>Add to Cart</button>
+                </div>
+            )
+        }
+
+
+
+        function App() {
+            return (
+                <>
+                    <Product name="Cotton socks" price="Price: $10.90" discountPrice="$5.25" imgSrc="../cotton-socks.png"/>
+                    <Product name="tennis balls" price="Price: $6.90" imgSrc="../plain-t-shirt.png"/>
+                    <Product name="Plain T-shirt" price="Price: $7.99" imgSrc="../tennis-balls.png"/>
+                </>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('container'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
