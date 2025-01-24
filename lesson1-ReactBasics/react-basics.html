@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>React Basics</title>
+	</head>
+	<body>
+		<div id='container' class="js-container"></div>
+
+		<!-- these two scrips loaded react library. -->
+		<script src="https://unpkg.com/supersimpledev/react.js"></script>
+		<script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+		<!-- external library "babel": translate JSX(js XML) used by react into JS -->
+		<script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+		<!-- dayjs library -->
+		<script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+		<!-- our own set up code -->
+		<script type="text/babel">
+			// root element object
+			const containerEle = document.querySelector('#container');
+
+			// content to render
+			let paragraph = (
+				<p>Current time: {dayjs().format('HH:mm:ss')}</p>
+			);
+
+			// react set up
+			const root = ReactDOM.createRoot(containerEle);
+			setInterval(() => {
+				let paragraph = (
+					<p>Current time: {dayjs().format('HH:mm:ss')}</p>
+				);
+				root.render(paragraph);
+			}, 1000);
+		</script>
+	</body>
+</html>

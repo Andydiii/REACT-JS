@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+</head>
+<body>
+    <div id='container' class="js-container"></div>
+
+    <!-- these two scrips loaded react library. -->
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <!-- external library "babel": translate JSX(js XML) used by react into JS -->
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <!-- dayjs library -->
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+    <!-- our own set up code -->
+    <script type="text/babel">
+        // Component1: chat input
+        function ChatInput() {
+            return (
+                // use fragment can use one less div
+                <>
+                    <input placeholder="Send a message to Chatbot" type="text" size="30" /> 
+                    <button>Send</button>
+                </>
+            );
+        }
+
+        // Component2: chat message
+        function ChatMessage(props) {
+            const message = props.message;
+            const sender = props.sender;
+            if (sender === 'robot') {
+                return (
+                    <div>
+                        <img src="./robot.png" width="50px" />
+                        {message}
+                    </div>
+                );
+            } else {
+                return (
+                    <div>
+                        {message}
+                        <img src="./userimage.png" width="50px" />
+                    </div>
+                );
+            }
+        }
+
+
+        // content to display
+        const renderContent = (
+            <>
+                <ChatInput />
+                <ChatMessage message="hello chatbot" sender="user"/>
+                <ChatMessage message="Hello! How can I help you?" sender="robot"/>
+                <ChatMessage message="Can you get me todays date?" sender="user"/>
+                <ChatMessage message="Today is September 27" sender="robot" />
+            </>
+        );
+        
+        // setup and render
+        const container = document.querySelector('#container');
+        ReactDOM.createRoot(container).render(renderContent);
+        
+    </script>
+</body>
+</html>
