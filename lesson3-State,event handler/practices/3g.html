@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+</head>
+<body>
+    <div id='container' class="js-container"></div>
+
+    <!-- these two scrips loaded react library. -->
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+
+    <!-- external library "babel": translate JSX(js XML) used by react into JS -->
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <!-- dayjs library -->
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+    <!-- our own set up code -->
+    <script type="text/babel">
+        
+        function App() {
+            const [inputText, setInputText] = React.useState('');
+            
+            function changeInput(event) {
+                setInputText(event.target.value);
+            }
+
+            function removeInputText() {
+                setInputText('');
+            }
+
+            function popExample() {
+                setInputText('Andy');
+            }
+            
+            return (
+                <>
+                    <input type="text" placeholder="Type a name here" onChange={changeInput} value={inputText}/>
+                    <button onClick={removeInputText}>Reset</button>
+                    <button onClick={popExample}>Example</button>
+                    <p>Hello {inputText}</p>
+                </>
+            )
+        }
+
+        
+
+
+        const container = document.getElementById('container');
+        ReactDOM.createRoot(container).render(
+            <App />
+        );
+
+    </script>
+</body>
+</html>

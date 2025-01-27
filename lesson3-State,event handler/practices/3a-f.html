@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+</head>
+<body>
+    <div id='container' class="js-container"></div>
+    
+
+    <!-- these two scrips loaded react library. -->
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+
+    <!-- external library "babel": translate JSX(js XML) used by react into JS -->
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <!-- dayjs library -->
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+    <!-- our own set up code -->
+    <script type="text/babel">
+
+        function CounterComponent({count, setCount}) {
+            function Clicked() {
+                setCount(count + 1);
+            }
+
+            return (
+                <button onClick={Clicked}>
+                    Clicked {count} {count === 1 ? 'time' : 'times'}
+                </button>
+            );
+        }
+
+        function App() {
+            const [count, setCount] = React.useState(0);
+
+            function reset() {
+                setCount(0);
+            }
+
+            return (
+                <>
+                    <CounterComponent count={count} setCount={setCount}/>
+                    <CounterComponent count={count} setCount={setCount}/>
+                    <button onClick={reset}>
+                        Reset
+                    </button>
+                </> 
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('container'));
+        root.render(<App />);
+
+    </script>
+</body>
+</html>
