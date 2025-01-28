@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+
+    <style>
+        .send-button {
+            background-color: rgb(25, 135, 84);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            margin-left: 10px;
+            border: none;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .chat-input {
+            padding: 10px 20px;
+            border-radius: 10px;
+            border-width: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div id='container' class="js-container"></div>
+
+    <!-- these two scrips loaded react library. -->
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+
+    <!-- external library "babel": translate JSX(js XML) used by react into JS -->
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <!-- dayjs library -->
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+    <!-- our own set up code -->
+    <script type="text/babel">
+
+        // Component1: chat input
+        function ChatInput({chatMessages, setChatMessages}) {
+
+            const [inputText, setInputText] = React.useState('');
+
+            const [isLoading, setIsLoading] = React.useState(false);
+
+            // whenever we change the input, it will be saved into inputText
+            function saveInputText(event) {
+                // inputText = new input
+                setInputText(event.target.value);
+            }
+
+            async function sendMesasge() {
+                if (isLoading || inputText === '') {
+                    return;
+                }
+
+                // wont change inputText right away, but change after the function is done.
+                setInputText('');
+
+                // cannot directly setNewChatMessages since it wont take effect right away.
+                const newChatMessages = [
+                    // copy the objects in chatMessages
+                    ...chatMessages,
+
+                    // add a new object in this array
+                    {
+                        message: inputText,
+                        sender: 'user',
+                        id: crypto.randomUUID()
+                    }
+                ];
+
+                setChatMessages([
+                    ...newChatMessages,
+                    {
+                        message: 'Loading',
+                        sender: 'robot',
+                        id: crypto.randomUUID()
+                    }
+                ]);
+
+                setIsLoading(true);
+
+                const Response = await Chatbot.getResponseAsync(inputText);
+                setChatMessages([
+                    ...newChatMessages,
+                    {
+                        message: Response,
+                        sender: 'robot',
+                        id: crypto.randomUUID()
+                    }
+                ]);
+
+                setIsLoading(false);
+            }
+
+            function keyDown(event) {
+                if (event.key === 'Enter') {
+                    sendMesasge();
+                } else if (event.key === 'Escape') {
+                    setInputText('');
+                }
+            }
+
+            return (
+                // use fragment can use one less div
+                <>
+                    <input 
+                        placeholder="Send a message to Chatbot" type="text" 
+                        size="30" 
+                        onChange={saveInputText}
+                        value={inputText} // with this we can change the content in input box
+                        onKeyDown={keyDown}
+                        className="chat-input"
+                    /> 
+                    <button
+                        onClick={sendMesasge}
+                        className="send-button"
+                    >Send</button>
+                </>
+            );
+        }
+
+        // Component2: ChatMessage()
+        function ChatMessage({message, sender}) {
+            // const {message, sender} = props;
+            return (
+                <div>
+                    {sender === 'robot' && (
+                        <img src="../imgs/robot.png" width="50px"/>
+                    )}
+                    {message}
+                    {sender === 'user' && (
+                        <img src="../imgs/userimage.png" width="50px"/>
+                    )}
+                </div>
+            );
+        }
+        
+        // Component3: ChatMessages()
+        function ChatMessages({chatMessages}) {
+            // generate HTML using component and prop. result is a array of components
+            return ( 
+                <>
+                    {chatMessages.map((chatMessage) => {
+                        return (
+                            <ChatMessage 
+                                message={chatMessage.message} 
+                                sender = {chatMessage.sender}
+                                key = {chatMessage.id}
+                            />
+                        );
+                    })}
+                </>
+            );
+        }
+
+        // main component 
+        function App() {
+            // store data in state. State: data that is connected to HTML
+            // first value in state is current data
+            // second value in state is updater function, it updates the data.
+            // alwasy use this function to change data, it will update HTML as well.
+            // const [chatMessages] = array[0];
+            // const [setChatMessages] = array[1];
+            // below is the array destructuring
+            const [chatMessages, setChatMessages] = React.useState([{
+                message: 'hello chatbot',
+                sender: 'user',
+                id: 'id1'
+            }, {
+                message: 'Hello! How can I help you?',
+                sender: 'robot',
+                id: 'id2'
+            }, {
+                message: 'Can you get me todays date?',
+                sender: 'user',
+                id: 'id3'
+            }, {
+                message: 'Today is September 27',
+                sender: 'robot',
+                id: 'id4'
+            }]);
+
+            return (
+                <>
+                    <ChatInput 
+                        // use props to share state to ChatInput component
+                        chatMessages={chatMessages}
+                        setChatMessages={setChatMessages}
+                    />
+                    <ChatMessages 
+                        chatMessages={chatMessages}
+                    />
+                </> 
+            );
+        }
+        
+        // setup and render
+        const container = document.querySelector('#container');
+        ReactDOM.createRoot(container).render(<App />);
+        
+    </script>
+</body>
+</html>
