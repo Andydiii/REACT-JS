@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>React Basics</title>
+		<style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                margin-top: 0px;
+                margin-bottom: 0px;
+            }
+
+            .p1 {
+                font-size: 35px;
+            }
+
+            .input-box-container-1, .input-box-container-2 {
+                margin-bottom: 10px;
+            }
+
+            .input-box-1, .input-box-2 {
+                padding: 12px 15px;
+                border-radius: 5px;
+                border-width: 1px;
+            }
+
+            .Login, .Signup {
+                background-color: rgb(33, 115, 238);
+                border: none;
+                border-radius: 5px;
+                padding: 10px 15px;
+                color: white;
+            }
+
+            .Signup {
+                margin-left: 10px;
+            }
+
+            .Show {
+                margin-left: 10px;
+            }
+
+            .buttonElem {
+                background-color: rgb(25, 135, 84);
+                margin-right: 5px;
+                border: none;
+                padding: 10px 15px;
+                color: white;
+            }
+
+            .button-flexbox {
+                display: flex;
+                flex-direction:column;
+
+                height: 100vh;
+                background-color: rgb(222,222,222);
+                align-items: center;
+            }
+
+            
+		</style>
+	</head>
+	<body>
+		<div id='container' class="js-container"></div>
+
+		<!-- these two scrips loaded react library. -->
+		<script src="https://unpkg.com/supersimpledev/react.js"></script>
+		<script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+		<!-- external library "babel": translate JSX(js XML) used by react into JS -->
+		<script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+		<!-- dayjs library -->
+		<script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+		<!-- our own set up code -->
+		<script type="text/babel">
+            function App() {
+                const [count, setCount] = React.useState(0);
+
+                function reset() {
+                    setCount(0);
+                }
+                
+                function clicked() {
+                    setCount(count + 1);
+                }
+
+                const buttonRef = React.useRef();
+
+
+                function autoClick() {
+                    setInterval(() => {
+                        const buttonElem = buttonRef.current;
+                        if (buttonElem) {
+                            buttonElem.click();
+                        }
+                    }, 1000);
+                }
+
+                return (
+                    <div className="button-flexbox">
+                        <button className = "buttonElem" onClick={clicked}
+                            ref={buttonRef}
+                        >
+                            Clicked {count} times
+                        </button>
+
+                        <button className = "buttonElem" onClick={reset}>
+                            Reset
+                        </button>
+
+                        <button className = "buttonElem" onClick={autoClick}>
+                            Auto Click
+                        </button>
+                    </div>
+                );
+            }
+
+            const container = document.getElementById('container');
+            ReactDOM.createRoot(container).render(<App />);
+		</script>
+	</body>
+</html>

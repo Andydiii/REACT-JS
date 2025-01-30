@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>React Basics</title>
+		<style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            .p1 {
+                font-size: 35px;
+            }
+
+            .input-box-container-1, .input-box-container-2 {
+                margin-bottom: 10px;
+            }
+
+            .input-box-1, .input-box-2 {
+                padding: 12px 15px;
+                border-radius: 5px;
+                border-width: 1px;
+            }
+
+            .Login, .Signup {
+                background-color: rgb(33, 115, 238);
+                border: none;
+                border-radius: 5px;
+                padding: 10px 15px;
+                color: white;
+            }
+
+            .Signup {
+                margin-left: 10px;
+            }
+
+            .Show {
+                margin-left: 10px;
+            }
+		</style>
+	</head>
+	<body>
+		<div id='container' class="js-container"></div>
+
+		<!-- these two scrips loaded react library. -->
+		<script src="https://unpkg.com/supersimpledev/react.js"></script>
+		<script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+		<!-- external library "babel": translate JSX(js XML) used by react into JS -->
+		<script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+		<!-- dayjs library -->
+		<script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+		<!-- our own set up code -->
+		<script type="text/babel">
+            function App() {
+                let currentTime = dayjs().format('HH:mm:ss');
+                let [time, setTime] = React.useState(currentTime);
+
+                React.useEffect(() => {
+                    setInterval(() => {
+                        currentTime = dayjs().format('HH:mm:ss');
+                        setTime(currentTime);
+                        console.log('run code');
+                    }, 1000);
+                }, []);
+                // dependency array = [] means useEffect will only be runed once after component is created
+                
+                return (
+                    <p>Current time: {time}</p>
+                );
+            }
+
+
+            const container = document.getElementById('container');
+            ReactDOM.createRoot(container).render(<App />);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>React Basics</title>
+		<style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            .p1 {
+                font-size: 35px;
+            }
+
+            .input-box-container-1, .input-box-container-2 {
+                margin-bottom: 10px;
+            }
+
+            .input-box-1, .input-box-2 {
+                padding: 12px 15px;
+                border-radius: 5px;
+                border-width: 1px;
+            }
+
+            .Login, .Signup {
+                background-color: rgb(33, 115, 238);
+                border: none;
+                border-radius: 5px;
+                padding: 10px 15px;
+                color: white;
+            }
+
+            .Signup {
+                margin-left: 10px;
+            }
+
+            .Show {
+                margin-left: 10px;
+            }
+		</style>
+	</head>
+	<body>
+		<div id='container' class="js-container"></div>
+
+		<!-- these two scrips loaded react library. -->
+		<script src="https://unpkg.com/supersimpledev/react.js"></script>
+		<script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+		<!-- external library "babel": translate JSX(js XML) used by react into JS -->
+		<script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+		<!-- dayjs library -->
+		<script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+		<!-- our own set up code -->
+		<script type="text/babel">
+            function App() {
+                const [showPassword, setShowPassword] = React.useState(false);
+
+                function clickShow() {
+                    setShowPassword(showPassword ? false : true);
+                }
+
+                return (
+                    <>
+                        <p className="p1">Hello, welcome to my website</p>
+                        <div className="input-box-container-1"><input className="input-box-1" type="text" placeholder="Email" /></div>
+                        <div className="input-box-container-2">
+                            <input className="input-box-2" type={showPassword ? 'text' : 'password'} placeholder="Password" />
+                            <button className="Show" onClick={clickShow}>{showPassword ? 'Hide' : 'Show'}</button>
+                        </div>
+                        <button className="Login">Login</button>
+                        <button className="Signup">Sign up</button>
+                    </>
+                );
+            }
+
+
+            const container = document.getElementById('container');
+            ReactDOM.createRoot(container).render(<App />);
+		</script>
+	</body>
+</html>

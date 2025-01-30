@@ -84,6 +84,16 @@
             -ms-overflow-style: none;
         }
 
+        .welcome-message {
+            color: rgb(120, 120, 120);
+            text-align: center;
+        }
+
+        .loading {
+            height: 40px;
+            margin: -15px;
+        }
+
     </style>
 </head>
 <body>
@@ -141,7 +151,7 @@
                 setChatMessages([
                     ...newChatMessages,
                     {
-                        message: 'Loading',
+                        message: <img src="loading.gif" className="loading" />,
                         sender: 'robot',
                         id: crypto.randomUUID()
                     }
@@ -252,29 +262,19 @@
             // const [chatMessages] = array[0];
             // const [setChatMessages] = array[1];
             // below is the array destructuring
-            const [chatMessages, setChatMessages] = React.useState([{
-                message: 'hello chatbot',
-                sender: 'user',
-                id: 'id1'
-            }, {
-                message: 'Hello! How can I help you?',
-                sender: 'robot',
-                id: 'id2'
-            }, {
-                message: 'Can you get me todays date?',
-                sender: 'user',
-                id: 'id3'
-            }, {
-                message: 'Today is September 27',
-                sender: 'robot',
-                id: 'id4'
-            }]);
+            const [chatMessages, setChatMessages] = React.useState([]);
 
             return (
                 <div className="app-container">
+                    {chatMessages.length === 0 
+                        ? <p className="welcome-message">Welcome to the chatbot project! Send a message using the textbox below.</p> 
+                        : null
+                    }
+
                     <ChatMessages 
                         chatMessages={chatMessages}
                     />
+
                     <ChatInput 
                         // use props to share state to ChatInput component
                         chatMessages={chatMessages}

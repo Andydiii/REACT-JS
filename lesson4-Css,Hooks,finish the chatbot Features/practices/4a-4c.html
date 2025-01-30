@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>React Basics</title>
+		<style>
+			.button-ON {
+				background-color: rgb(25, 135, 84);
+				border-radius: 5px;
+				border: none;
+				padding: 10px 15px;
+				color: white;
+
+				cursor: pointer;
+			}
+
+			.button-OFF {
+				background-color: rgb(220, 53, 69);
+				border-radius: 5px;
+				border: none;
+				padding: 10px 15px;
+				color: white;
+
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div id='container' class="js-container"></div>
+
+		<!-- these two scrips loaded react library. -->
+		<script src="https://unpkg.com/supersimpledev/react.js"></script>
+		<script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+		<!-- external library "babel": translate JSX(js XML) used by react into JS -->
+		<script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+		<!-- dayjs library -->
+		<script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+		<!-- our own set up code -->
+		<script type="text/babel">
+            function App() {
+				const [isButtonOn, setIsButtonOn] = React.useState(false)
+
+				function clickButton() {
+					setIsButtonOn(isButtonOn === false ? true : false);
+				}
+
+                return (
+                    <button
+						onClick={clickButton}
+						className={isButtonOn ? 'button-ON' : 'button-OFF'}
+					>
+                        {isButtonOn ? 'ON' : 'OFF'}
+                    </button>
+                );
+            }
+
+
+            const container = document.getElementById('container');
+            ReactDOM.createRoot(container).render(<App />);
+		</script>
+	</body>
+</html>
