@@ -29,3 +29,4 @@ react project structure:
   - creates a vite server(put our website at a URL)
     - vite server is a replacement for live server
 - node_modules have all necessary packages/external libraries we installed for our project
+- main.jsx sets up React and render the UI
