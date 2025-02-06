@@ -35,7 +35,7 @@ react project structure:
     - vite server is a replacement for live server
 - node_modules have all necessary packages/external libraries we installed for our project
 - main.jsx sets up React and render the UI
-- how npm run dev works:
+- how `npm run dev` works:
   - npm run = tells the computer to look inside package.json for a section called "scripts" 
   - dev = look inside `scripts` for `dev` and run the command on the right side of "dev"(which is vite)
   - the `vite` command is added by the vite package. It starts the vite server , which lets us view the React website.
