@@ -43,3 +43,4 @@ react project structure:
 
 ### git
 - repository = a folder where git is tracking changes
+- .gitignore = tells git which files and folders to ignore (not to track changes)
