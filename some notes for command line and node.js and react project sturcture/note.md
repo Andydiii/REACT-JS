@@ -39,3 +39,7 @@ react project structure:
   - npm run = tells the computer to look inside package.json for a section called "scripts" 
   - dev = look inside `scripts` for `dev` and run the command on the right side of "dev"(which is vite)
   - the `vite` command is added by the vite package. It starts the vite server , which lets us view the React website.
+
+
+### git
+- repository = a folder where git is tracking changes
