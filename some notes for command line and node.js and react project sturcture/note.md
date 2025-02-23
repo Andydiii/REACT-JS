@@ -44,3 +44,44 @@ react project structure:
 ### git
 - repository = a folder where git is tracking changes
 - .gitignore =  tells git which files and folders to ignore (not to track changes)
+
+### Routing
+- Routing lets us create multiple pages using 1 HTML file. This lets us reuse our HTML code.
+- How to set up a router?
+  - npm install `react-router@version you want`
+  - `import { BrowserRouter } from 'react-router';`and wrap the app component with BrowserRouter in the main.jsx
+    ```js
+      createRoot(document.getElementById('root')).render(
+        <StrictMode>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </StrictMode>,
+      )
+    ```
+  -  Routes: tells React all the pages that are in our website. **A Route = A page**
+  -  set up `Routes, Route` component in app.jsx:
+      ```js
+        import { Routes, Route} from 'react-router';
+
+        function App() {
+          return (
+            <Routes>
+              {/* path = "URL path", URL path is the last part of the URL*/}
+              {/* this tells react when we go to url path / or empty, display HomePage component */}
+              <Route path="/" element={<HomePage/>}></Route>
+              <Route path='checkout' element={<>Test checkout page</>}></Route>
+            </Routes>
+          )
+        }
+      ```
+  - now we have multiple pages in our website, all these `share one single html`, which reduces repeatition.
+    - Single Page Application(SPA)
+      - = we only have 1 HTML file
+      - = we use REACT to create multiple pages
+  - some shortcuts for `<Route>`
+    ```js
+      <Route path="/" element={<HomePage/>}></Route>
+      // same as 
+      <Route index element={<HomePage/>} />
+    ```
