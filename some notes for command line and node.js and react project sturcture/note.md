@@ -25,7 +25,7 @@ nodejs:
 react project structure:
 - eslint.config.js used to highlight problems in our js code. 
   - need to install eslint extension to see the err captured by eslint.
-- index.html is home page. but it loads js code from a different file.
+- / is home page. but it loads js code from a different file.
 - package.json has a list of packages that need to install to run this project
   - when first touch this project, user uses `npm install` in command line. note this command autolly install all needed packages.
 - package-lock.json saves the version of all packages we have installed
