@@ -39,6 +39,9 @@ react project structure:
   - npm run = tells the computer to look inside package.json for a section called "scripts" 
   - dev = look inside `scripts` for `dev` and run the command on the right side of "dev"(which is vite)
   - the `vite` command is added by the vite package. It starts the vite server , which lets us view the React website.
+- src code structure:
+  - page code put in `pages` folder
+  - reusable code put in `components` folder
 
 
 ### git
@@ -85,3 +88,4 @@ react project structure:
       // same as 
       <Route index element={<HomePage/>} />
     ```
+  - `react-router` provides a component `Link` to achieve using javascript to display a page without reloading. So instead of using a router, use `<Link>` instead of `<a>`
